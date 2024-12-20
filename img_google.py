@@ -99,13 +99,13 @@ if st.button("Download and Send"):
                         if send_email(email_address, zip_file_path):
                             st.success(f"Images successfully sent to {email_address}!")
                             
-                            # Clear the folder after sending email
-                            clear_folder(downloaded_images_path)
-                            st.success("Folder cleared successfully!")
                         else:
                             st.error("Failed to send email")
                 else:
                     st.warning("Please enter an email address to send the images.")
+                
+                clear_folder(downloaded_images_path)
+                st.success("Folder cleared successfully!")
 
             except Exception as e:
                 st.error(f"Error downloading images: {str(e)}")
