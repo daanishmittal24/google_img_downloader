@@ -72,7 +72,8 @@ st.write("Enter a search query to download images from Google Images.")
 query = st.text_input("Search Query", "monkey smoking")
 limit = st.number_input("Number of Images to Download", min_value=1, value=7)
 email_address = st.text_input("Enter your Email Address", "daanishmittal24@gmail.com")
-
+clear_folder(downloaded_images_path)
+st.success("Folder cleared successfully!")
 if st.button("Download and Send"):
     if query:
         with st.spinner("Downloading images..."):
