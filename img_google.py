@@ -77,8 +77,6 @@ if st.button("Download and Send"):
     if query:
         with st.spinner("Downloading images..."):
             try:
-                clear_folder(downloaded_images_path)
-                st.success("Folder cleared successfully!")
                 downloaded_images_path = download_images(query, limit)
                 st.success(f"Downloaded {limit} images for '{query}'!")  
                 zip_file_path = zip_images(downloaded_images_path)
