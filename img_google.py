@@ -78,9 +78,10 @@ if st.button("Download and Send"):
         with st.spinner("Downloading images..."):
             try:
                 downloaded_images_path = download_images(query, limit)
-                st.success(f"Downloaded {limit} images for '{query}'!")                
+                st.success(f"Downloaded {limit} images for '{query}'!")  
                 zip_file_path = zip_images(downloaded_images_path)
                 st.success(f"Images zipped into {zip_file_path}!")
+                
                 with open(zip_file_path, 'rb') as f:
                     st.download_button(
                         label="Download Images as ZIP",
@@ -88,6 +89,8 @@ if st.button("Download and Send"):
                         file_name='downloaded_images.zip',
                         mime='application/zip'
                     )
+                
+                # Show images
                 for img in os.listdir(downloaded_images_path):
                     st.image(os.path.join(downloaded_images_path, img))
 
@@ -95,6 +98,10 @@ if st.button("Download and Send"):
                     with st.spinner("Sending email..."):
                         if send_email(email_address, zip_file_path):
                             st.success(f"Images successfully sent to {email_address}!")
+                            
+                            # Clear the folder after sending email
+                            clear_folder(downloaded_images_path)
+                            st.success("Folder cleared successfully!")
                         else:
                             st.error("Failed to send email")
                 else:
